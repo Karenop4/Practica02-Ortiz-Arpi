@@ -49,4 +49,9 @@ public class Prestamo {
     public void esPrestamoVigente(){
         
     }
+    
+    @Override
+    public String toString(){
+        return "Prestamo [libro: " + libro + ", usuario: " + usuario + ", fecha prestamo: " + fechaPrestamo + ", fecha devolucion: " + fechaDevolucion + "]";
+    }
 }
