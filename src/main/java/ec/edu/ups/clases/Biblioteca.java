@@ -1,7 +1,6 @@
 package ec.edu.ups.clases;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Biblioteca {
 	private String nombre;
@@ -48,17 +47,63 @@ public class Biblioteca {
 		listaUsuarios.add(usuario);
 	}
 	public void prestarLibro(Libro libro, Usuario usuario) {
+		boolean existeUsuario=false;
 		
+		for (int i=0; i<listaUsuarios.size();i++) {
+			Usuario usuarioBuscado = listaUsuarios.get(i);
+			if (usuarioBuscado.equals(usuarioBuscado)) {
+				existeUsuario = true;
+				break;
+			}
+		}
+		
+		if(existeUsuario) {
+			for (int i = 0; i<listaLibros.size(); i++) {
+				Libro libroBuscado = listaLibros.get(i);
+				if (libroBuscado.equals(libro)) {
+					if (libroBuscado.isDisponible()) {
+						System.out.println("Libro encontrado");
+						break;
+					}else {
+						System.out.println("El libro no está disponible");
+					}
+				}
+			}
+		}else {
+			System.out.println("Usuario no encontrado");
+		}
 	}
+	
 	//////Sobrecarga de metodos
 	public void buscarLibro(String titulo, String autor, int anho) {
-		
+		for (int i = 0; i<listaLibros.size(); i++) {
+			Libro libroBuscado = listaLibros.get(i);
+			if (libroBuscado.getTitulo().equals(titulo) && libroBuscado.getAutor().equals(autor) && libroBuscado.getAnho()==anho) {
+				System.out.println(libroBuscado.toString());
+			}else {
+				System.out.println("El libro no encontrado");
+			}
+		}
 	}
 	public void buscarLibro(String titulo, String autor) {
-		
+		for (int i = 0; i<listaLibros.size(); i++) {
+			Libro libroBuscado = listaLibros.get(i);
+			if (libroBuscado.getTitulo().equals(titulo) && libroBuscado.getAutor().equals(autor)) {
+				System.out.println(libroBuscado.toString());
+			}else {
+				System.out.println("El libro no encontrado");
+			}
+		}
 	}
 	public void buscarLibro(String titulo) {
-		
+		for (int i = 0; i<listaLibros.size(); i++) {
+			Libro libroBuscado = listaLibros.get(i);
+			if (libroBuscado.getTitulo().equals(titulo)) {
+				System.out.println(libroBuscado.toString());
+			}else {
+				System.out.println("El libro no encontrado");
+			}
+		}
 	}
 	
 	
