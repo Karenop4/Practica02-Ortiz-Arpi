@@ -24,4 +24,9 @@ public abstract class Persona {
     //Metodos
     
     public abstract void mostrarInformacion();
+    
+    @Override
+    public String toString(){
+        return "Persona [nombre: " + nombre + ", identificacion: " + identificacion + "]";
+    }
 }
