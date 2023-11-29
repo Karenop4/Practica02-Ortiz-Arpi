@@ -19,8 +19,6 @@ public class Biblioteca {
 		this.listaUsuarios = new ArrayList();
 	}
 	
-	
-
 	public Biblioteca() {
 		this.listaLibros = new ArrayList();
 		this.listaUsuarios = new ArrayList();
@@ -44,10 +42,10 @@ public class Biblioteca {
 
 	//Métodos
 	public void agregarLibro(Libro libro) {
-		
+		listaLibros.add(libro);
 	}
 	public void registrarUsuario(Usuario usuario) {
-		
+		listaUsuarios.add(usuario);
 	}
 	public void prestarLibro(Libro libro, Usuario usuario) {
 		
