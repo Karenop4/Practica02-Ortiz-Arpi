@@ -1,5 +1,7 @@
 package ec.edu.ups.clases;
 
-public class Libro {
+import ec.edu.ups.interfaces.*;
+
+public class Libro{
 
 }
