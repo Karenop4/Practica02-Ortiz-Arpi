@@ -3,6 +3,21 @@ package ec.edu.ups.clases;
 public abstract class Persona {
     private String nombre;
     private String identificacion;
+    
+    //Constructores
+
+    public Persona(String nombre, String identificacion) {
+        this.nombre = nombre;
+        this.identificacion = identificacion;
+    }
+
+    public Persona(String identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public Persona() {
+    }
+    
 
     //Getters and setters
     public String getNombre() {
