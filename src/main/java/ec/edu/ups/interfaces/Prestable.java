@@ -1,7 +1,9 @@
 package ec.edu.ups.interfaces;
 
+import ec.edu.ups.clases.Libro;
+
 public interface Prestable {
-	public void prestar();
-	public void devolver();
+	public void prestar(Libro libro);
+	public void devolver(Libro libro);
 	public void mostrarInformacion();
 }

@@ -63,6 +63,7 @@ public class Biblioteca {
 				if (libroBuscado.equals(libro)) {
 					if (libroBuscado.isDisponible()) {
 						System.out.println("Libro encontrado");
+						libroBuscado.mostrarInformacion();
 						break;
 					}else {
 						System.out.println("El libro no está disponible");
@@ -79,7 +80,7 @@ public class Biblioteca {
 		for (int i = 0; i<listaLibros.size(); i++) {
 			Libro libroBuscado = listaLibros.get(i);
 			if (libroBuscado.getTitulo().equals(titulo) && libroBuscado.getAutor().equals(autor) && libroBuscado.getAnho()==anho) {
-				System.out.println(libroBuscado.toString());
+				libroBuscado.mostrarInformacion();
 			}else {
 				System.out.println("El libro no encontrado");
 			}
@@ -89,7 +90,7 @@ public class Biblioteca {
 		for (int i = 0; i<listaLibros.size(); i++) {
 			Libro libroBuscado = listaLibros.get(i);
 			if (libroBuscado.getTitulo().equals(titulo) && libroBuscado.getAutor().equals(autor)) {
-				System.out.println(libroBuscado.toString());
+				libroBuscado.mostrarInformacion();
 			}else {
 				System.out.println("El libro no encontrado");
 			}
@@ -99,7 +100,7 @@ public class Biblioteca {
 		for (int i = 0; i<listaLibros.size(); i++) {
 			Libro libroBuscado = listaLibros.get(i);
 			if (libroBuscado.getTitulo().equals(titulo)) {
-				System.out.println(libroBuscado.toString());
+				libroBuscado.mostrarInformacion();
 			}else {
 				System.out.println("El libro no encontrado");
 			}

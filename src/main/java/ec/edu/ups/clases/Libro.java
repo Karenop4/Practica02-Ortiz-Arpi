@@ -56,21 +56,21 @@ public class Libro implements Prestable{
 	
 	//sobreescritura de metodos
 	@Override
-	public void prestar() {
-		// TODO Auto-generated method stub
-		
+	public void prestar(Libro libro) {
+		libro.setDisponible(false);
 	}
 
 	@Override
-	public void devolver() {
-		// TODO Auto-generated method stub
-		
+	public void devolver(Libro libro) {
+		libro.setDisponible(true);
 	}
 
 	@Override
 	public void mostrarInformacion() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Título-> " + titulo);
+		System.out.println("Autor-> " + autor);
+		System.out.println("anho-> " + anho);
+		System.out.println("Disponible-> " + (disponible ? "Sí" : "No"));
 	}
 
 	@Override
