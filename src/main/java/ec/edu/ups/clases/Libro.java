@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import ec.edu.ups.interfaces.*;
 
-public class Libro implements Prestable{
+public class Libro implements IPrestable{
 	private String titulo;
 	private String autor;
 	private int anho;
