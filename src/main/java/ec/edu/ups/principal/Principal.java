@@ -8,17 +8,20 @@ import ec.edu.ups.clases.*;
 public class Principal {
 
 	public static void main(String[] args) {
-		Biblioteca biblioteca = new Biblioteca("Biblioteca Central", "123 Calle Principal");
-		Libro libro = new Libro();
-		ArrayList <Libro> listaDePosiblesLibrosPrestados = new ArrayList();
-		Scanner scanner = new Scanner(System.in);
-		int opcion;
-		boolean existenUsuarios=false;
-		boolean sesionIniciada =false;
-		boolean existenLibros=false;
+		Biblioteca biblioteca = new Biblioteca("Biblioteca Central", "123 Calle Principal");//Creacion de biblioteca
+		Libro libro = new Libro();//Creación variable auxiliar de tipo Libro para la busqueda de libros
+		ArrayList <Libro> listaDePosiblesLibrosPrestados = new ArrayList(); //Lista preliminar de libros a ser prestados
+		Scanner scanner = new Scanner(System.in);//Inicializacion del scanner
+		int opcion;//Opción menús
+		boolean existenUsuarios=false; //Corrobora que existan usuarios registrados
+		boolean sesionIniciada =false; //Corrobora que haya una sesión activa
+		boolean existenLibros=false; //Corrobora que la biblioteca tengan libros
+		
+		//Variables sirven para ingresar libros y buscarlos segun los distintos parámetros
 		String titulo="";
 		String autor="";
 		int anho=0;
+		
 		do {
 			System.out.println("========"+biblioteca.getNombre()+"========");
 			System.out.println("Sistema de Gestión de Biblioteca");
@@ -36,6 +39,7 @@ public class Principal {
 				case 1:
 				// Implementación para agregar libro
 					System.out.println("========"+biblioteca.getNombre()+"========");
+					//////////Ingreso de datos del libro////////////////
 					System.out.println("Ingresar titulo del libro: ");
 					titulo = scanner.nextLine();
 					System.out.println("Ingresar autor: ");
@@ -43,16 +47,18 @@ public class Principal {
 					System.out.println("Ingresar año de publicacion: ");
 					anho = scanner.nextInt();
 					
-					Libro libroAIgresar = new Libro(titulo,autor,anho,true);
+					Libro libroAIgresar = new Libro(titulo,autor,anho,true);//Creación de libro a ingresar a la biblioteca
 					
-					biblioteca.agregarLibro(libroAIgresar);
+					biblioteca.agregarLibro(libroAIgresar);//Añade a la lista de libros disponibles de la biblioteca
 					existenLibros=true;
 					break;
 				case 2:
 				// Implementación para registrar usuario
+					//////////Variables para ingresar datos del usuario//////////////
 					String nombre;
 					String identificacion;
 					String correo;
+					/////////////Ingreso de datos/////////////////
 					System.out.println("========"+biblioteca.getNombre()+"========");
 					System.out.println("Ingrese su nombre: ");
 					nombre = scanner.nextLine();
@@ -61,18 +67,19 @@ public class Principal {
 					System.out.println("Ingrese su correo: ");
 					correo = scanner.nextLine();
 					
-					Usuario usuario = new Usuario(nombre, identificacion, correo);
-					biblioteca.registrarUsuario(usuario);
+					Usuario usuario = new Usuario(nombre, identificacion, correo);//Creacion de usuario nuevo
+					biblioteca.registrarUsuario(usuario);//Añade a lista de usuarios de la biblioteca
 					existenUsuarios = true;
 					break;
 				case 3:
 				//Implementación para iniciar sesion
 					System.out.println("========"+biblioteca.getNombre()+"========");
 					if(existenUsuarios) {
-						Usuario usuario1 = new Usuario();
-						String correo1;
+						Usuario usuario1 = new Usuario();//Usuario auxiliar para el inicio de sesión
+						String correo1;//Variable para ingresar el correo a buscar
 						System.out.println("Ingrese su correo: ");
 						correo1 = scanner.nextLine();
+						/////////Busca en la lista de usuarios, el correo ingresado//////////////////
 						for(int i=0; i < biblioteca.devolverListaUsuarios().size();i++) {
 							usuario1 = biblioteca.devolverListaUsuarios().get(i);
 							if(correo1.equals(usuario1.getCorreo())) {
@@ -88,8 +95,8 @@ public class Principal {
 					break;
 				case 4:
 				// Implementación para buscar libro
-					boolean libroEncontrado=false;
 					System.out.println("========"+biblioteca.getNombre()+"========");
+					//////////////////Se puede buscar libros, solo si existe una sesión iniciada y si la biblioteca cuenta con libros//////////////////////
 					if(sesionIniciada && existenLibros) {
 						do {
 							System.out.println("Método de búsqueda de libros");
@@ -101,18 +108,22 @@ public class Principal {
 							scanner.nextLine(); // Consumir la nueva línea
 							switch(opcion) {
 							case 1:
+							// Busca por titulo, autor y año
+								/////////////////Ingreso de datos///////////////////
 								System.out.println("Ingrese el título: ");
 								titulo = scanner.nextLine();
 								System.out.println("Ingrese el autor: ");
 								autor = scanner.nextLine();
 								System.out.println("Ingrese el año: ");
 								anho = scanner.nextInt();
-								libro=biblioteca.buscarLibro(titulo);
+								libro=biblioteca.buscarLibro(titulo);//Busca el libro
+								
 								if(libro != null && libro.isDisponible()) {
+									//Entra solo si el libro buscado existe y está disponible
 									System.out.println("¿Desea solicitar el libro?");
 									System.out.println("1.Si \t 2.No");
 									opcion = scanner.nextInt();
-									if (opcion==1) {
+									if (opcion==1) {//Agrega el libro a una lista preliminar de préstamos
 										System.out.println("Agregando libro");
 										listaDePosiblesLibrosPrestados.add(libro);
 									}else {
@@ -121,16 +132,20 @@ public class Principal {
 								}
 								break;
 							case 2:
+							// Busca por titulo y autor
+								/////////////////Ingreso de datos///////////////////
 								System.out.println("Ingrese el título: ");
 								titulo = scanner.nextLine();
 								System.out.println("Ingrese el autor: ");
 								autor = scanner.nextLine();
-								libro=biblioteca.buscarLibro(titulo, autor);
+								libro=biblioteca.buscarLibro(titulo, autor);//Busca el libro
+								
 								if(libro != null && libro.isDisponible()) {
+									//Entra solo si el libro buscado existe y está disponible
 									System.out.println("¿Desea solicitar el libro?");
 									System.out.println("1.Si \t 2.No");
 									opcion = scanner.nextInt();
-									if (opcion==1) {
+									if (opcion==1) {//Agrega el libro a una lista preliminar de préstamos
 										System.out.println("Agregando libro");
 										listaDePosiblesLibrosPrestados.add(libro);
 									}else {
@@ -139,14 +154,18 @@ public class Principal {
 								}
 								break;
 							case 3:
+							// Busca por titulo
+								/////////////////Ingreso de datos///////////////////
 								System.out.println("Ingrese el título: ");
 								titulo = scanner.nextLine();
-								libro=biblioteca.buscarLibro(titulo);
+								libro=biblioteca.buscarLibro(titulo);//Busca el libro
+								
 								if(libro != null && libro.isDisponible()) {
+									//Entra solo si el libro buscado existe y está disponible
 									System.out.println("¿Desea solicitar el libro?");
 									System.out.println("1.Si \t 2.No");
 									opcion = scanner.nextInt();
-									if (opcion==1) {
+									if (opcion==1) {//Agrega el libro a una lista preliminar de préstamos
 										System.out.println("Agregando libro");
 										listaDePosiblesLibrosPrestados.add(libro);
 									}else {
@@ -173,6 +192,11 @@ public class Principal {
 						/* Funciona solo si el usuario inició sesión, inicia sesión solo con el correo
 						 * En buscar libro si el libro está disponible, el usuario puede elegir si quiere el libro 
 						 * o no, si quiere el libro se agrega a una listaDePosiblesLibrosPrestados
+						 * 
+						 * En la clase Biblioteca hay el metodo prestarLibro, no está con codigo porque no se como le vas a hacer
+						 * para el préstamo de libros
+						 * 
+						 * En la clase libro hay los metodos para poner prestar y devolver, estos setean la disponibilidad del libro 
 						 */
 					}else {
 						System.out.println("Primero inicie sesión con su correo");

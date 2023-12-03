@@ -57,12 +57,12 @@ public class Libro implements IPrestable{
 	//sobreescritura de metodos
 	@Override
 	public void prestar(Libro libro) {
-		libro.setDisponible(false);
+		libro.setDisponible(false);//Si el libro se presta deja de estar disponible
 	}
 
 	@Override
 	public void devolver(Libro libro) {
-		libro.setDisponible(true);
+		libro.setDisponible(true);//Si el libro se devuelve vuelve a estar disponible
 	}
 
 	@Override

@@ -30,11 +30,13 @@ public class Usuario extends Persona{
 		this.correo = correo;
 	}
 	
-	public void solicitarPrestamo(Libro libro, Usuario usuario, Date fechaPrestamo, Date fechaDevolucion) {
+	//Metodos
+	public void solicitarPrestamo(Libro libro, Usuario usuario, Date fechaPrestamo, Date fechaDevolucion) {//Creacion lista de préstamos
 		Prestamo nuevoPrestamo = new Prestamo (libro, usuario, fechaPrestamo, fechaDevolucion);
-		listaPrestamos.add(nuevoPrestamo);	}
+		listaPrestamos.add(nuevoPrestamo);	
+	}
 	
-	public void devolverLibro(Libro libro) {
+	public void devolverLibro(Libro libro) {//Metodo para cuando el usuario devuelva el libro a la biblioteca
 		if (libro.isDisponible()==false) {
 			libro.setDisponible(true);
 			Prestamo prestamo = new Prestamo();

@@ -1,7 +1,6 @@
 package ec.edu.ups.clases;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Biblioteca {
 	private String nombre;
@@ -46,27 +45,15 @@ public class Biblioteca {
 	public void registrarUsuario(Usuario usuario) {
 		listaUsuarios.add(usuario);
 	}
+	
 	public void prestarLibro(Libro libro) {
 		
-		for (int i = 0; i<listaLibros.size(); i++) {
-			Libro libroBuscado = listaLibros.get(i);
-			if (libroBuscado.equals(libro)) {
-				if (libroBuscado.isDisponible()) {
-					System.out.println("Libro encontrado");
-					libroBuscado.mostrarInformacion();
-					break;
-				}else {
-					System.out.println("El libro no está disponible");
-				}
-			}
-		}
 	}
 	
-	
+	//Devuelve las listas de libros y usuarios para en Principal Buscar libros y usuarios para el inicio de sesión
 	public ArrayList<Libro> devolverListaLibros() {
 		return listaLibros;
 	}
-
 	public ArrayList<Usuario> devolverListaUsuarios() {
 		return listaUsuarios;
 	}
@@ -84,6 +71,7 @@ public class Biblioteca {
 		}
 		return null;
 	}
+	
 	public Libro buscarLibro(String titulo, String autor) {
 		for (int i = 0; i<listaLibros.size(); i++) {
 			Libro libroBuscado = listaLibros.get(i);
@@ -95,8 +83,8 @@ public class Biblioteca {
 			}
 		}
 		return null;
-		
 	}
+	
 	public Libro buscarLibro(String titulo) {
 		for (int i = 0; i<listaLibros.size(); i++) {
 			Libro libroBuscado = listaLibros.get(i);
