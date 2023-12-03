@@ -46,32 +46,19 @@ public class Biblioteca {
 	public void registrarUsuario(Usuario usuario) {
 		listaUsuarios.add(usuario);
 	}
-	public void prestarLibro(Libro libro, Usuario usuario) {
-		boolean existeUsuario=false;
+	public void prestarLibro(Libro libro) {
 		
-		for (int i=0; i<listaUsuarios.size();i++) {
-			Usuario usuarioBuscado = listaUsuarios.get(i);
-			if (usuarioBuscado.equals(usuarioBuscado)) {
-				existeUsuario = true;
-				break;
-			}
-		}
-		
-		if(existeUsuario) {
-			for (int i = 0; i<listaLibros.size(); i++) {
-				Libro libroBuscado = listaLibros.get(i);
-				if (libroBuscado.equals(libro)) {
-					if (libroBuscado.isDisponible()) {
-						System.out.println("Libro encontrado");
-						libroBuscado.mostrarInformacion();
-						break;
-					}else {
-						System.out.println("El libro no está disponible");
-					}
+		for (int i = 0; i<listaLibros.size(); i++) {
+			Libro libroBuscado = listaLibros.get(i);
+			if (libroBuscado.equals(libro)) {
+				if (libroBuscado.isDisponible()) {
+					System.out.println("Libro encontrado");
+					libroBuscado.mostrarInformacion();
+					break;
+				}else {
+					System.out.println("El libro no está disponible");
 				}
 			}
-		}else {
-			System.out.println("Usuario no encontrado");
 		}
 	}
 	
@@ -85,35 +72,42 @@ public class Biblioteca {
 	}
 
 	//////Sobrecarga de metodos
-	public void buscarLibro(String titulo, String autor, int anho) {
+	public Libro buscarLibro(String titulo, String autor, int anho) {
 		for (int i = 0; i<listaLibros.size(); i++) {
 			Libro libroBuscado = listaLibros.get(i);
 			if (libroBuscado.getTitulo().equals(titulo) && libroBuscado.getAutor().equals(autor) && libroBuscado.getAnho()==anho) {
 				libroBuscado.mostrarInformacion();
+				return libroBuscado;
 			}else {
 				System.out.println("El libro no encontrado");
 			}
 		}
+		return null;
 	}
-	public void buscarLibro(String titulo, String autor) {
+	public Libro buscarLibro(String titulo, String autor) {
 		for (int i = 0; i<listaLibros.size(); i++) {
 			Libro libroBuscado = listaLibros.get(i);
 			if (libroBuscado.getTitulo().equals(titulo) && libroBuscado.getAutor().equals(autor)) {
 				libroBuscado.mostrarInformacion();
+				return libroBuscado;
 			}else {
 				System.out.println("El libro no encontrado");
 			}
 		}
+		return null;
+		
 	}
-	public void buscarLibro(String titulo) {
+	public Libro buscarLibro(String titulo) {
 		for (int i = 0; i<listaLibros.size(); i++) {
 			Libro libroBuscado = listaLibros.get(i);
 			if (libroBuscado.getTitulo().equals(titulo)) {
 				libroBuscado.mostrarInformacion();
+				return libroBuscado;
 			}else {
 				System.out.println("El libro no encontrado");
 			}
 		}
+		return null;
 	}
 	
 	
