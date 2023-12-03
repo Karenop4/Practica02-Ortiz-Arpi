@@ -11,7 +11,6 @@ public class Biblioteca {
 	//Constructor
 
 	public Biblioteca(String nombre, String direccion) {
-		super();
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.listaLibros = new ArrayList();
