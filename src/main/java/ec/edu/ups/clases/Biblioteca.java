@@ -1,6 +1,7 @@
 package ec.edu.ups.clases;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Biblioteca {
 	private String nombre;
@@ -74,6 +75,15 @@ public class Biblioteca {
 		}
 	}
 	
+	
+	public ArrayList<Libro> devolverListaLibros() {
+		return listaLibros;
+	}
+
+	public ArrayList<Usuario> devolverListaUsuarios() {
+		return listaUsuarios;
+	}
+
 	//////Sobrecarga de metodos
 	public void buscarLibro(String titulo, String autor, int anho) {
 		for (int i = 0; i<listaLibros.size(); i++) {
@@ -111,5 +121,6 @@ public class Biblioteca {
 	@Override
 	public String toString() {
 		return "Biblioteca [nombre=" + nombre + ", direccion=" + direccion + "]";
-	}	
+	}
+	
 }

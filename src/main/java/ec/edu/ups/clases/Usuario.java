@@ -21,6 +21,7 @@ public class Usuario extends Persona{
 		this.correo = correo;
 		this.listaPrestamos = new ArrayList();
 	}
+	
 	//Getters y Setters
 	public String getCorreo() {
 		return correo;
