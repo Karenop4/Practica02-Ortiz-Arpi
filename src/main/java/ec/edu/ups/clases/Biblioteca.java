@@ -50,8 +50,7 @@ public class Biblioteca {
 		
 	}
 	
-	//Devuelve las listas de libros y usuarios para en Principal Buscar libros y usuarios para el inicio de sesión
-
+	//Devuelve la lista de usuarios para en Principal Buscar usuario para el inicio de sesión
 	public ArrayList<Usuario> devolverListaUsuarios() {
 		return listaUsuarios;
 	}
