@@ -42,6 +42,6 @@ public abstract class Persona {
     
     @Override
     public String toString(){
-        return "Persona [nombre: " + nombre + ", identificacion: " + identificacion + "]";
+        return "[Nombre: " + nombre + ", Identificacion: " + identificacion + "]";
     }
 }

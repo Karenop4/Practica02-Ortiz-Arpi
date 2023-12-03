@@ -1,18 +1,26 @@
 package ec.edu.ups.clases;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
-public class Usuario {
+public class Usuario extends Persona{
 	private String correo;
+	private ArrayList <Prestamo> listaPrestamos;
 	
 	//Constructores
 	public Usuario(String correo) {
 		this.correo = correo;
 	}
 	public Usuario() {
-		
+		this.listaPrestamos = new ArrayList();
 	}
 	
+	public Usuario(String nombre, String identificacion, String correo) {
+		super(nombre, identificacion);
+		this.correo = correo;
+		this.listaPrestamos = new ArrayList();
+	}
 	//Getters y Setters
 	public String getCorreo() {
 		return correo;
@@ -22,11 +30,20 @@ public class Usuario {
 	}
 	
 	public void solicitarPrestamo(Libro libro, Usuario usuario, Date fechaPrestamo, Date fechaDevolucion) {
-		
-	}
+		Prestamo nuevoPrestamo = new Prestamo (libro, usuario, fechaPrestamo, fechaDevolucion);
+		listaPrestamos.add(nuevoPrestamo);	}
 	
 	public void devolverLibro(Libro libro) {
-		
+		if (libro.isDisponible()==false) {
+			libro.setDisponible(true);
+			Prestamo prestamo = new Prestamo();
+			for(int i=0;i<listaPrestamos.size();i++) {
+				prestamo=listaPrestamos.get(i);
+				if(prestamo.getLibro().equals(libro)) {
+					listaPrestamos.remove(i);
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -34,5 +51,30 @@ public class Usuario {
 		return "Usuario [correo=" + correo + "]";
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(correo);
+	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(correo, other.correo);
+	}
+	
+	@Override
+	public void mostrarInformacion() {
+		System.out.println(super.toString());
+		System.out.println("Correo: " + correo);
+		System.out.println("Lista de préstamos: ");
+		for(int i=0; i<listaPrestamos.size();i++) {
+			System.out.println((i+1) + ". " + listaPrestamos.get(i));
+		}
+	}
 }

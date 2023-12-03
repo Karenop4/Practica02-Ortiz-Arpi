@@ -1,6 +1,7 @@
 package ec.edu.ups.clases;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Prestamo {
     private Libro libro;
@@ -83,4 +84,23 @@ public class Prestamo {
     public String toString(){
         return "Prestamo [libro: " + libro + ", usuario: " + usuario + ", fecha prestamo: " + fechaPrestamo + ", fecha devolucion: " + fechaDevolucion + "]";
     }
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(libro);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Prestamo other = (Prestamo) obj;
+		return Objects.equals(libro, other.libro);
+	}
+    
+    
 }
