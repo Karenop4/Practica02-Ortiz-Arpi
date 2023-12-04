@@ -49,6 +49,11 @@ public class Usuario extends Persona{
 		}
 	}
 	
+        public ArrayList<Prestamo> getPrestamo(){
+            return listaPrestamos;
+        }
+        
+        
 	@Override
 	public String toString() {
 		return "Usuario [correo=" + correo + "]";

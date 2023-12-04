@@ -16,6 +16,7 @@ public class Principal {
 		Biblioteca biblioteca = new Biblioteca("Biblioteca Central", "123 Calle Principal");//Creacion de biblioteca
 		Libro libro = new Libro();//Creación variable auxiliar de tipo Libro para la busqueda de libros
 		ArrayList <Libro> listaDePosiblesLibrosPrestados = new ArrayList(); //Lista preliminar de libros a ser prestados
+                ArrayList <Prestamo> listaDePrestamos = new ArrayList();
 		Scanner scanner = new Scanner(System.in);//Inicializacion del scanner
                 Usuario usuarioSesion = new Usuario();//Variable que almacena el usuario que ha ingresado sesion
 		int opcion;//Opción menús
@@ -113,6 +114,7 @@ public class Principal {
 							System.out.println("2.Por título y autor");
 							System.out.println("3.Por título");
 							System.out.println("4.Volver menú principal");
+                                                        System.out.print("Ingrese la opcion: ");
 							opcion = scanner.nextInt();
 							scanner.nextLine(); // Consumir la nueva línea
 							switch(opcion) {
@@ -215,10 +217,11 @@ public class Principal {
                                                 }
                                                 System.out.println("¿La informacion es correcta?");
                                                 System.out.println("1.Si \t 2.No");
+                                                System.out.print("Ingrese una opcion: ");
                                                 if(scanner.nextInt()!=1){
                                                     break;
                                                 }
-                                                System.out.print("Ingrese la fecha (formato: dd/MM/yyyy): ");
+                                                System.out.print("Ingrese la fecha de devolucion (formato: dd/MM/yyyy): ");
                                                 String fechaIngresada = scanner.next();
 
                                                 SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -235,6 +238,10 @@ public class Principal {
                                                     listaDePosiblesLibrosPrestados.get(i).prestar(listaDePosiblesLibrosPrestados.get(i));
                                                     System.out.println("Libro ["+ listaDePosiblesLibrosPrestados.get(i).getTitulo() +"] prestado! Le quedan ");
                                                 }
+                                                //Vaciar el vector
+                                                for(int i = listaDePosiblesLibrosPrestados.size()-1; i>=0; i--){
+                                                    listaDePosiblesLibrosPrestados.remove(i);
+                                                }
 					}else {
 						System.out.println("Primero inicie sesión con su correo");
 					}
@@ -242,9 +249,30 @@ public class Principal {
 				case 6:
 				// Implementación para devolver libro}
 					if(sesionIniciada) {
-						
+                                            listaDePrestamos = usuarioSesion.getPrestamo();
+                                            System.out.println("Libros Prestados");
+                                            System.out.println("==============================");
+                                            for(int i=0; i<listaDePrestamos.size(); i++){
+                                                listaDePrestamos.get(i).getLibro().mostrarInformacion();
+                                                System.out.println("==============================");
+                                            }
+                                            System.out.println("Ingrese el nombre del libro a devolver");
+                                            titulo = scanner.nextLine();
+                                            libro=biblioteca.buscarLibro(titulo);
+                                            if(libro != null) {
+                                                //Entra solo si el libro buscado existe y está disponible
+                                                System.out.println("¿Desea devolver el libro?");
+                                                System.out.println("1.Si \t 2.No");
+                                                opcion = scanner.nextInt();
+                                                if (opcion==1) {//Agrega el libro a una lista preliminar de préstamos
+                                                        System.out.println("Devolviendo libro");
+                                                        usuarioSesion.devolverLibro(libro);
+                                                }else {
+                                                        System.out.println("Volviendo al menú de búsqueda...");
+                                                }
+                                            }
 					}else {
-						System.out.println("Primero inicie sesión con su correo");
+                                            System.out.println("Primero inicie sesión con su correo");
 					}
 					break;
 				case 7:
