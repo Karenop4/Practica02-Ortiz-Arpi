@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import ec.edu.ups.clases.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Principal {
 
 	public static void main(String[] args) {
+                Date fechaHoy = new Date();
+                Date fecha1 = new Date(); //Fecha para almacenar la devolucion de los libros
 		Biblioteca biblioteca = new Biblioteca("Biblioteca Central", "123 Calle Principal");//Creacion de biblioteca
 		Libro libro = new Libro();//Creación variable auxiliar de tipo Libro para la busqueda de libros
 		ArrayList <Libro> listaDePosiblesLibrosPrestados = new ArrayList(); //Lista preliminar de libros a ser prestados
 		Scanner scanner = new Scanner(System.in);//Inicializacion del scanner
+                Usuario usuarioSesion = new Usuario();//Variable que almacena el usuario que ha ingresado sesion
 		int opcion;//Opción menús
 		boolean existenUsuarios=false; //Corrobora que existan usuarios registrados
 		boolean sesionIniciada =false; //Corrobora que haya una sesión activa
@@ -85,10 +91,13 @@ public class Principal {
 							if(correo1.equals(usuario1.getCorreo())) {
 								System.out.println("Sesion iniciada");
 								sesionIniciada=true;
+                                                                usuarioSesion = usuario1;
 								break;
 							}
+                                                        if(i==biblioteca.devolverListaUsuarios().size()-1){
+                                                            System.out.println("Usuario no encontrado");
+                                                        }
 						}
-						System.out.println("Usuario no encontrado");
 					}else {
 						System.out.println("No existen usurarios registrados");
 					}
@@ -198,6 +207,34 @@ public class Principal {
 						 * 
 						 * En la clase libro hay los metodos para poner prestar y devolver, estos setean la disponibilidad del libro 
 						 */
+                                                System.out.println("Libros Escogidos Actualmente:");
+                                                System.out.println("==============================");
+                                                for(int i = 0; i<listaDePosiblesLibrosPrestados.size(); i++){
+                                                    listaDePosiblesLibrosPrestados.get(i).mostrarInformacion();
+                                                    System.out.println("==============================");
+                                                }
+                                                System.out.println("¿La informacion es correcta?");
+                                                System.out.println("1.Si \t 2.No");
+                                                if(scanner.nextInt()!=1){
+                                                    break;
+                                                }
+                                                System.out.print("Ingrese la fecha (formato: dd/MM/yyyy): ");
+                                                String fechaIngresada = scanner.next();
+
+                                                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+                                                
+                                                try {
+                                                    fecha1 = formatoFecha.parse(fechaIngresada);
+                                                } catch (ParseException e) {
+                                                    System.out.println("Error al analizar la fecha. Asegúrese de usar el formato dd/MM/yyyy.");
+                                                    break;
+                                                }
+                                                
+                                                for(int i = 0; i<listaDePosiblesLibrosPrestados.size(); i++){
+                                                    usuarioSesion.solicitarPrestamo(listaDePosiblesLibrosPrestados.get(i), usuarioSesion, fechaHoy, fecha1);
+                                                    listaDePosiblesLibrosPrestados.get(i).prestar(listaDePosiblesLibrosPrestados.get(i));
+                                                    System.out.println("Libro ["+ listaDePosiblesLibrosPrestados.get(i).getTitulo() +"] prestado! Le quedan ");
+                                                }
 					}else {
 						System.out.println("Primero inicie sesión con su correo");
 					}
