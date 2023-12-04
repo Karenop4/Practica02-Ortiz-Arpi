@@ -53,7 +53,7 @@ public class Usuario extends Persona{
             return listaPrestamos;
         }
         
-	public Libro buscarLibro(String titulo) {
+	public Libro buscarLibroPrestado(String titulo) {
 		for (int i = 0; i<listaPrestamos.size(); i++) {
 			Libro libroBuscado = listaPrestamos.get(i).getLibro();
 			if (libroBuscado.getTitulo().equals(titulo)) {

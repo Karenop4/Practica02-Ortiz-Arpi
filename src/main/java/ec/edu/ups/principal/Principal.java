@@ -259,7 +259,7 @@ public class Principal {
                                             }
                                             System.out.println("Ingrese el nombre del libro a devolver");
                                             titulo = scanner.nextLine();
-                                            libro=usuarioSesion.buscarLibro(titulo);
+                                            libro=usuarioSesion.buscarLibroPrestado(titulo);
                                             if(libro != null) {
                                                 //Entra solo si el libro buscado existe en el vector de prestamos
                                                 System.out.println("¿Desea devolver el libro?");
