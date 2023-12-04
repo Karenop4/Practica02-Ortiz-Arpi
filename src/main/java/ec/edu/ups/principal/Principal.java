@@ -236,7 +236,7 @@ public class Principal {
                                                 for(int i = 0; i<listaDePosiblesLibrosPrestados.size(); i++){
                                                     usuarioSesion.solicitarPrestamo(listaDePosiblesLibrosPrestados.get(i), usuarioSesion, fechaHoy, fecha1);
                                                     listaDePosiblesLibrosPrestados.get(i).prestar(listaDePosiblesLibrosPrestados.get(i));
-                                                    System.out.println("Libro ["+ listaDePosiblesLibrosPrestados.get(i).getTitulo() +"] prestado! Le quedan ");
+                                                    System.out.println("Libro ["+ listaDePosiblesLibrosPrestados.get(i).getTitulo() +"] prestado! Le quedan " + usuarioSesion.getPrestamo().get(usuarioSesion.getPrestamo().size()-1).calcularDiasPrestamo() + " dia(s)" );
                                                 }
                                                 //Vaciar el vector
                                                 for(int i = listaDePosiblesLibrosPrestados.size()-1; i>=0; i--){
@@ -254,13 +254,14 @@ public class Principal {
                                             System.out.println("==============================");
                                             for(int i=0; i<listaDePrestamos.size(); i++){
                                                 listaDePrestamos.get(i).getLibro().mostrarInformacion();
+                                                System.out.println("Dias Restantes: "+ listaDePrestamos.get(i).calcularDiasPrestamo() + " dia(s)");
                                                 System.out.println("==============================");
                                             }
                                             System.out.println("Ingrese el nombre del libro a devolver");
                                             titulo = scanner.nextLine();
-                                            libro=biblioteca.buscarLibro(titulo);
+                                            libro=usuarioSesion.buscarLibro(titulo);
                                             if(libro != null) {
-                                                //Entra solo si el libro buscado existe y está disponible
+                                                //Entra solo si el libro buscado existe en el vector de prestamos
                                                 System.out.println("¿Desea devolver el libro?");
                                                 System.out.println("1.Si \t 2.No");
                                                 opcion = scanner.nextInt();

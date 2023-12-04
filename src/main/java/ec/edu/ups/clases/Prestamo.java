@@ -1,5 +1,8 @@
 package ec.edu.ups.clases;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
@@ -57,22 +60,17 @@ public class Prestamo {
     
     //Metodos
     public int calcularDiasPrestamo(){
-        int a = fechaDevolucion.getYear()-fechaPrestamo.getYear();
-        int m = fechaDevolucion.getMonth()-fechaPrestamo.getMonth();
-        if(m<0){
-            m=m+12;
-            a--;
-        }
-        int d = fechaDevolucion.getDay()-fechaPrestamo.getDay();
-        if (d<0) {
-            d=d+30;
-            m--;
-        }
-        if(m<0){
-            m=m+12;
-            a--;
-        }
-        return (a*365)+(m*30)+d;
+
+        // Convertir las fechas a LocalDate
+        LocalDate localDateInicio = fechaPrestamo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateFin = fechaDevolucion.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        // Calcular la duración entre las dos fechas
+        Duration duracion = Duration.between(localDateInicio.atStartOfDay(), localDateFin.atStartOfDay());
+
+        // Obtener la cantidad de días
+        long dias = duracion.toDays();
+        return (int) dias;
     }
     
     public boolean esPrestamoVigente(){

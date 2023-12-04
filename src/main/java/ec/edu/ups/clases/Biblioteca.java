@@ -62,7 +62,8 @@ public class Biblioteca {
 			if (libroBuscado.getTitulo().equals(titulo) && libroBuscado.getAutor().equals(autor) && libroBuscado.getAnho()==anho) {
 				libroBuscado.mostrarInformacion();
 				return libroBuscado;
-			}else {
+			}
+                        if(i==listaLibros.size()-1){
 				System.out.println("El libro no encontrado");
 			}
 		}
@@ -75,7 +76,8 @@ public class Biblioteca {
 			if (libroBuscado.getTitulo().equals(titulo) && libroBuscado.getAutor().equals(autor)) {
 				libroBuscado.mostrarInformacion();
 				return libroBuscado;
-			}else {
+			}
+                        if(i==listaLibros.size()-1){
 				System.out.println("El libro no encontrado");
 			}
 		}
@@ -88,7 +90,8 @@ public class Biblioteca {
 			if (libroBuscado.getTitulo().equals(titulo)) {
 				libroBuscado.mostrarInformacion();
 				return libroBuscado;
-			}else {
+			}
+                        if(i==listaLibros.size()-1){
 				System.out.println("El libro no encontrado");
 			}
 		}

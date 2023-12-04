@@ -53,6 +53,19 @@ public class Usuario extends Persona{
             return listaPrestamos;
         }
         
+	public Libro buscarLibro(String titulo) {
+		for (int i = 0; i<listaPrestamos.size(); i++) {
+			Libro libroBuscado = listaPrestamos.get(i).getLibro();
+			if (libroBuscado.getTitulo().equals(titulo)) {
+				libroBuscado.mostrarInformacion();
+				return libroBuscado;
+			}
+                        if(i==listaPrestamos.size()-1){
+				System.out.println("El libro no ha sido prestado");
+			}
+		}
+		return null;
+	}
         
 	@Override
 	public String toString() {
